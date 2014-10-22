@@ -11,14 +11,12 @@ var app = {
     }
 };
 
- // Función 'callback' satisfactoria
-    //
-    function captureSuccess(mediaFiles) {
-        var i, len;
-        for (i = 0, len = mediaFiles.length; i < len; i += 1) {
-            uploadFile(mediaFiles[i]);
-        }
-    }
+window.onload=function(){
+    document.getElementById("foto").style.width = (window.innerWidth-50)+"px";
+    document.getElementById("foto").style.height = (window.innerWidth-50)+"px";
+    document.getElementById("foto").style.backgroundImage="url('img/cordova.png')";
+    document.getElementById("foto").style.backgroundSize="50% 50%";
+};
 
     // Llamada si algún error ocurre.
     //
@@ -26,29 +24,31 @@ var app = {
         var msg = 'Ocurrió un error mientras se capturaba: ' + error.code;
         navigator.notification.alert(msg, null, 'Uh oh!');
     }
+function capturePhoto() {
+    navigator.camera.getPicture(onSuccess, onFail, { quality: 90,
+        destinationType: Camera.DestinationType.DATA_URL,
+        correctOrientation: true,
+        targetWidth: 1000,
+        targetHeight: 1000
+    });
+}
 
-    // Un botón llamara esta función
-    //
-    function captureImage() {
-        // Lanza la aplicación de cámara,
-        // y permite capturar hasta 2 imágenes
-        navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 2});
-    }
+function getPhoto(source) {
+    navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 90,
+        destinationType: destinationType.FILE_URI,
+    sourceType: source });
+}
 
-    // Sube los ficheros al servidor
-    function uploadFile(mediaFile) {
-        var ft = new FileTransfer(),
-            path = mediaFile.fullPath,
-            name = mediaFile.name;
+function onSuccess(imageData) {
+    document.getElementById("foto").style.backgroundImage="url('data:image/jpeg;base64,"+imageData+"')";
+    document.getElementById("foto").style.backgroundSize="100% 100%";
+}
 
-        ft.upload(path,
-            "http://my.domain.com/upload.php",
-            function(result) {
-                console.log('Subida correcta: ' + result.responseCode);
-                console.log(result.bytesSent + ' bytes enviados');
-            },
-            function(error) {
-                console.log('Error en la subida del fichero ' + path + ': ' + error.code);
-            },
-            { fileName: name });
-    }
+function onPhotoURISuccess(imageURI) {
+    document.getElementById("foto").style.backgroundImage="url('"+imageURI+"')";
+    document.getElementById("foto").style.backgroundSize="100% 100%";
+}
+
+function onFail(message) {
+    alert('Failed because: ' + message);
+}
