@@ -6,7 +6,7 @@ h2 {
 #button {
     width: 100px;
     height: 30px;
-    font-size-adjust: auto;
+    font-size: 10px;
     background-color: #d0d0d0;
 }
 
