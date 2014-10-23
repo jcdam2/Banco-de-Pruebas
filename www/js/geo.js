@@ -1,3 +1,8 @@
+function geolocalizar() {
+    alert('Hola');
+    navigator.geolocation.getCurrentPosition(onSucess, onError);
+};
+
 var onSucess = function(position) {
     alert('Latitud : '  + position.coords.latitude +    '\n' +
           'Longitud: '  + position.coords.longitude +   '\n' +
@@ -7,9 +12,4 @@ var onSucess = function(position) {
 function (onError) {
     alert('Código: '    + error.code +                  '\n' +
           'Mensaje: '   + error.message +               '\n' );
-};
-
-function geolocalizar(){
-    /*navigator.geolocation.getCurrentPosition(onSuccess, onError);*/
-    alert('Hola.');
 };
