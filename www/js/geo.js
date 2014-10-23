@@ -1,15 +1,19 @@
-function geolocalizar() {
-    alert('Hola');
-    navigator.geolocation.getCurrentPosition(onSucess, onError);
-};
+/* Lo dejamos en Stand-By mientras miramos los contactos
+        NO FUNCIONA -- NO FUNCIONA -- NO FUNCIONA
+*/
 
-var onSucess = function(position) {
-    alert('Latitud : '  + position.coords.latitude +    '\n' +
-          'Longitud: '  + position.coords.longitude +   '\n' +
-          'Hora: '      + new Date(position.timeStamp)+ '\n');
+
+var onSucess = function (position) {
+    alert('Latitud : '  + position.coords.latitude      + '\n' +
+          'Longitud: '  + position.coords.longitude     + '\n' +
+          'Hora: '      + position.timestamp            + '\n');
 };
 
 function (onError) {
-    alert('Código: '    + error.code +                  '\n' +
-          'Mensaje: '   + error.message +               '\n' );
-};
+    alert('Código: '    + error.code                    + '\n' +
+          'Mensaje: '   + error.message                 + '\n' );
+}
+
+function geolocalizar() {
+    navigator.geolocation.getCurrentPosition(onSucess, onError);
+}
