@@ -8,8 +8,9 @@
 
 </head>
 <body>
-    <script type="text/javascript" src="phonegap.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+    <!--<script type="text/javascript" charset="utf-8" src="js/index.js"></script>-->
+    <script type="text/javascript" charset="utf-8" src="js/geo.js"></script>
     <script type="text/javascript">
             app.initialize();
     </script>
@@ -18,7 +19,7 @@
         <button id="button" name="camara" ontouchend = "capturePhoto()">Cámara</button>
         <button id="button" name="bluetooth">Bluetooth</button>
         <button id="button" name="acelerometro">Acelerómetro</button>
-        <button id="button" name="geolocalizador">Geolocalización</button>
+        <button id="button" name="geolocalizador" ontouchend = "geolocalizar()">Geolocalización</button>
         <button id="button" name="notificaciones">Notificaciones</button>
         <button id="button" name="wifi">¿Wifi?</button>
     </form>
