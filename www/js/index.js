@@ -26,7 +26,7 @@ window.onload=function(){
     }
 function capturePhoto() {
     navigator.camera.getPicture(onSuccess, onFail, { quality: 90,
-        destinationType: Camera.DestinationType.DATA_URL,
+        destinationType: Camera.DestinationType.FILE_URI,
         correctOrientation: true,
         targetWidth: 1000,
         targetHeight: 1000
@@ -40,8 +40,8 @@ function getPhoto(source) {
 }
 
 function onSuccess(imageData) {
-    document.getElementById("foto").style.backgroundImage="url('data:image/jpeg;base64,"+imageData+"')";
-    document.getElementById("foto").style.backgroundSize="100% 100%";
+    var image = document.getElementById('myImage');
+    image.src = imageURI;
 }
 
 function onPhotoURISuccess(imageURI) {
