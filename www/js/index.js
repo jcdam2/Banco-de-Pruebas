@@ -1,54 +1,82 @@
-var app = {
-    initialize: function() {
-        this.bindEvents();
-    },
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-    onDeviceReady: function() {
+    var pictureSource;   // picture source
+    var destinationType; // sets the format of returned value
+
+    // Wait for PhoneGap to connect with the device
+    //
+    document.addEventListener("deviceready",onDeviceReady,false);
+
+    // PhoneGap is ready to be used!
+    //
+    function onDeviceReady() {
         pictureSource=navigator.camera.PictureSourceType;
         destinationType=navigator.camera.DestinationType;
     }
-};
 
-window.onload=function(){
-    document.getElementById("foto").style.width = (window.innerWidth-50)+"px";
-    document.getElementById("foto").style.height = (window.innerWidth-50)+"px";
-    document.getElementById("foto").style.backgroundImage="url('img/cordova.png')";
-    document.getElementById("foto").style.backgroundSize="50% 50%";
-};
-
-    // Llamada si algún error ocurre.
+    // Called when a photo is successfully retrieved
     //
-    function captureError(error) {
-        var msg = 'Ocurrió un error mientras se capturaba: ' + error.code;
-        navigator.notification.alert(msg, null, 'Uh oh!');
+    function onPhotoDataSuccess(imageData) {
+      // Uncomment to view the base64 encoded image data
+      // console.log(imageData);
+
+      // Get image handle
+      //
+      var smallImage = document.getElementById('smallImage');
+
+      // Unhide image elements
+      //
+      smallImage.style.display = 'block';
+
+      // Show the captured photo
+      // The inline CSS rules are used to resize the image
+      //
+      smallImage.src = "data:image/jpeg;base64," + imageData;
     }
-function capturePhoto() {
-    navigator.camera.getPicture(onSuccess, onFail, { quality: 90,
-        destinationType: Camera.DestinationType.FILE_URI,
-        correctOrientation: true,
-        targetWidth: 1000,
-        targetHeight: 1000
-    });
-}
 
-function getPhoto(source) {
-    navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 90,
+    // Called when a photo is successfully retrieved
+    //
+    function onPhotoURISuccess(imageURI) {
+      // Uncomment to view the image file URI
+      // console.log(imageURI);
+
+      // Get image handle
+      //
+      var largeImage = document.getElementById('largeImage');
+
+      // Unhide image elements
+      //
+      largeImage.style.display = 'block';
+
+      // Show the captured photo
+      // The inline CSS rules are used to resize the image
+      //
+      largeImage.src = imageURI;
+    }
+
+    // A button will call this function
+    //
+    function capturePhoto() {
+      // Take picture using device camera and retrieve image as base64-encoded string
+      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50, allowEdit : true});
+    }
+
+    // A button will call this function
+    //
+    function capturePhotoEdit() {
+      // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
+      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true });
+    }
+
+    // A button will call this function
+    //
+    function getPhoto(source) {
+      // Retrieve image file location from specified source
+      navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
         destinationType: destinationType.FILE_URI,
-    sourceType: source });
-}
+        sourceType: source });
+    }
 
-function onSuccess(imageData) {
-    var image = document.getElementById('myImage');
-    image.src = imageURI;
-}
-
-function onPhotoURISuccess(imageURI) {
-    document.getElementById("foto").style.backgroundImage="url('"+imageURI+"')";
-    document.getElementById("foto").style.backgroundSize="100% 100%";
-}
-
-function onFail(message) {
-    alert('Failed because: ' + message);
-}
+    // Called if something bad happens.
+    //
+    function onFail(message) {
+      alert('Failed because: ' + message);
+    }
