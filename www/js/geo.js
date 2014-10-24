@@ -1,5 +1,6 @@
 function geolocationSuccess(position) {
-    alert('Latitud: ' + position.coords.latitude);
+    alert('Latitud: ' + position.coords.latitude +
+           ' Longitud: ' + position.coords.longitude);
 }
 
 function geolocationError(error) {
