@@ -13,14 +13,18 @@
     <script type="text/javascript" charset="utf-8" src="js/geo.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/contactos.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/contact.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/video.js"></script>
+     <script type="text/javascript" charset="utf-8" src="js/audio.js"></script>
     <script type="text/javascript">
             app.initialize();
     </script>
     <h2>Banco de Pruebas</h2>
     <form class="center">
-        <button id="button" name="camara" ontouchend = "capturePhoto()">Cámara</button>
-        <button id="button" name="contactos" ontouchend = "cogerContactos()">Contactos</button>
-        <button id="button" name="contatos2" ontouchend = "contactos()">Contactos2</button>
+        <button id="button" name="camara" onclick = "capturePhoto()">Cámara</button>
+        <button id="button" name="video" onclick = "captureVideo()">Video</button>
+         <button id="button" name="audio" onclick = "captureAudio()">Audio</button>
+        <button id="button" name="contactos" onclick = "cogerContactos()">Contactos</button>
+        <button id="button" name="contatos2" onclick = "contactos()">Contactos2</button>
         <button id="button" name="acelerometro">Acelerómetro</button>
         <button id="button" name="geolocalizador" ontouchend = "geolocalizar()">Geolocalización</button>
         <button id="button" name="notificaciones">Notificaciones</button>

@@ -1,5 +1,5 @@
 // Comprueba la disponibilidad del móbil y permite usar las funciones de PhoneGap.
-document.addEventListener("deviceready", contactos, false);
+//document.addEventListener("deviceready", contactos, false);
 
 // Llama a la aplicación.
 
@@ -10,11 +10,11 @@ function contactos() {
     options.multiple=true; // Devuelve múltiples resultados.
     filter = ["displayName", "phoneNumbers"];   // Devuelve el Nombre.
 // Búsqueda de contactos.
-    navigator.contacts.find(filter, onSuccess, onError, options);
+    navigator.contacts.find(filter, contactSuccess, contactError, options);
 }
 
 // onSuccess: Recibes los contactos por alertas.
-function onSuccess(contacts) {
+function contactSuccess(contacts) {
     for (var i=0; i<contacts.length; i++) {
         alert(contacts[i].displayName + contacts[i].phoneNumbers.value);
     }
@@ -22,6 +22,6 @@ function onSuccess(contacts) {
 
     // onError: Failed to get the contacts
     //
-function onError(contactError) {
+function contactError(contactError) {
     alert('Error en la lectura de contactos.');
 }

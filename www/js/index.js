@@ -78,5 +78,5 @@
     // Called if something bad happens.
     //
     function onFail(message) {
-      alert('Failed because: ' + message);
+      alert('An error a ocurred during capture... ' + message);
     }
